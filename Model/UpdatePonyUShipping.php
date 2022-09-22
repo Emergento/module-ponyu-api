@@ -35,7 +35,7 @@ class UpdatePonyUShipping implements UpdatePonyUShippingInterface
             $order = $this->getOrderByIncrementId($orderId);
 
             $ponyuStatus = strtolower($status);
-            $this->eventManager->dispatch(sprintf('ponyu_status_changed_%s',$ponyuStatus), ['order' => $order]);
+            $this->eventManager->dispatch(sprintf('ponyu_status_changed_%s', $ponyuStatus), ['order' => $order]);
 
             $orderStatusHistory = $this->orderStatusHistoryFactory->create();
             $orderStatusHistory->setComment(__($this->ponyUConfig->getMagentoStatusMessage($status)));
@@ -46,7 +46,6 @@ class UpdatePonyUShipping implements UpdatePonyUShippingInterface
         } catch (NoSuchEntityException $e) {
             $this->logger->debug(__('invalid order id %1 : %2', $orderId, $e->getMessage()));
         }
-
     }
 
     /**
